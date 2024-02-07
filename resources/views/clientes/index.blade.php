@@ -22,7 +22,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach($clientes as $cliente)
+                @forelse($clientes as $cliente)
                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                             {{ $cliente->nome }}
@@ -45,8 +45,19 @@
                             @endforelse
                         </td>
                     </tr>
-                @endforeach
+                @empty
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <th>Nenhum Cliente Cadastrado</th>
+                        <td></td>
+                    </tr>
+                @endforelse
             </tbody>
         </table>
+
+        <div class="my-4">
+            {{ $clientes->links() }}
+        </div>
     </div>
 </x-layout>

@@ -16,7 +16,7 @@ class ClienteController extends Controller
      */
     public function index()
     {
-        $clientes = Client::get();
+        $clientes = Client::paginate(15);
         $clientes->load('projects');
 
         return view('clientes.index', [
