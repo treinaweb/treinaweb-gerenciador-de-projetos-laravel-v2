@@ -34,6 +34,12 @@
                 </div>
             @endif
 
+            @if (session('mensagem'))
+                <div class="text-xl p-2 bg-green-500 text-white border-2 border-green-500 rounded-sm text-center">
+                    {{ session('mensagem') }}
+                </div>
+            @endif
+
             {{ $slot }}
         </div>
     </body>
