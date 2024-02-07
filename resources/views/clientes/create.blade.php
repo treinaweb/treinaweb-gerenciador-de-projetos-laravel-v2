@@ -1,5 +1,5 @@
 <x-layout titulo="Cadastrar novo Cliente">
-    <form method="post" action="/clientes" class="max-w-6xl mx-auto">
+    <form method="post" action="{{ route('clientes.store') }}" class="max-w-6xl mx-auto">
         @csrf
         <div class="mb-5">
             <label for="nome" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nome do cliente</label>

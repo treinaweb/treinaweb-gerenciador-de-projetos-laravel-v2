@@ -12,7 +12,7 @@
             
                 <ul class="font-medium flex">
                     <li class="px-4">
-                        <a href="/clientes">Cadastro de Clientes</a>
+                        <a href="{{ route('clientes.index') }}">Cadastro de Clientes</a>
                     </li>
                 </ul>
             </div>
