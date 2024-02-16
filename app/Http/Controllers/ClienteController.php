@@ -58,18 +58,14 @@ class ClienteController extends Controller
             ->with('mensagem', 'Cliente cadastrado com sucesso!');
     }
 
-    public function edit($clienteId)
+    public function edit(Client $cliente)
     {
-        $cliente = Client::where('id', $clienteId)->first();
-
         return view('clientes.edit', compact('cliente'));
     }
 
-    public function update(Request $request, $clienteId)
+    public function update(Request $request, Client $cliente)
     {
         $dados = $request->only(['nome', 'endereco', 'descricao']);
-
-        $cliente = Client::where('id', $clienteId)->first();
         $cliente->update($dados);
 
         return redirect()
