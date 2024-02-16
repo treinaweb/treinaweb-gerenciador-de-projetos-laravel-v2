@@ -57,4 +57,11 @@ class ClienteController extends Controller
             ->route('clientes.index')
             ->with('mensagem', 'Cliente cadastrado com sucesso!');
     }
+
+    public function edit($clienteId)
+    {
+        $cliente = Client::where('id', $clienteId)->first();
+
+        return view('clientes.edit', compact('cliente'));
+    }
 }
