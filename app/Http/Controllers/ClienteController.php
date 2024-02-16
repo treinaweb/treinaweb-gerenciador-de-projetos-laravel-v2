@@ -64,4 +64,16 @@ class ClienteController extends Controller
 
         return view('clientes.edit', compact('cliente'));
     }
+
+    public function update(Request $request, $clienteId)
+    {
+        $dados = $request->only(['nome', 'endereco', 'descricao']);
+
+        $cliente = Client::where('id', $clienteId)->first();
+        $cliente->update($dados);
+
+        return redirect()
+            ->route('clientes.index')
+            ->with('mensagem', 'Cliente atualizado com sucesso!');
+    }
 }
