@@ -51,7 +51,21 @@
                             @endforelse
                         </td>
                         <td class="px-6 py-4">
-                            <a href="{{ route('clientes.edit', $cliente->id) }}">Editar</a>
+                            <a
+                                href="{{ route('clientes.edit', $cliente->id) }}"
+                                class="bg-blue-500 border rounded-md p-1 px-3 text-white"
+                            >Editar</a>
+
+                            <form method="POST" action="{{ route('clientes.destroy', $cliente->id) }}" class="inline-block">
+                                @method('delete')
+                                @csrf
+
+                                <button
+                                    class="bg-red-500 border rounded-md p-1 px-3 text-white"
+                                    onclick="return confirm('Deseja realmente apagar esse cliente?')"
+                                >Excluir</button>
+
+                            </form>
                         </td>
                     </tr>
                 @empty
