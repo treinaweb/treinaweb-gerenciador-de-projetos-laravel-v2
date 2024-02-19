@@ -30,7 +30,17 @@ class FuncionarioController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $funcionario = Employee::create(
+            $request->only(['nome', 'cpf', 'data_contratacao'])
+        );
+
+        $funcionario->address()->create(
+            $request->only(['logradouro', 'numero', 'complemento', 'bairro', 'cidade', 'cep', 'estado'])
+        );
+
+        return redirect()
+            ->route('funcionarios.index')
+            ->with('mensagem', 'Funcionário criado com sucesso!');
     }
 
     /**
