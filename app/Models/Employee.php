@@ -80,4 +80,26 @@ class Employee extends Model
 
         return true;
     }
+
+    /**
+     * Apaga o funcionário e seu endereço do banco
+     */
+    public function apagar(): bool
+    {
+        try {
+            DB::beginTransaction();
+
+            $this->address()->delete();
+
+            $this->delete();
+
+            DB::commit();
+        } catch (\Throwable $th) {
+            DB::rollBack();
+
+            return false;
+        }
+
+        return true;
+    }
 }

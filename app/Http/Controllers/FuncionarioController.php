@@ -88,8 +88,18 @@ class FuncionarioController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Employee $funcionario)
     {
-        //
+        $estaApagado = $funcionario->apagar();
+
+        if (!$estaApagado) {
+            return redirect()
+                    ->back()
+                    ->withErrors('Erro ao deletar o funcionário');
+        }
+
+        return redirect()
+            ->route('funcionarios.index')
+            ->with('mensagem', 'Funcionário deletado com sucesso!');
     }
 }
