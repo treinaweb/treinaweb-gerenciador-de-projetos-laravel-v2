@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Employee;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class FuncionarioController extends Controller
 {
@@ -30,13 +31,25 @@ class FuncionarioController extends Controller
      */
     public function store(Request $request)
     {
-        $funcionario = Employee::create(
-            $request->only(['nome', 'cpf', 'data_contratacao'])
-        );
+        try {
+            DB::beginTransaction();
+            
+            $funcionario = Employee::create(
+                $request->only(['nome', 'cpf', 'data_contratacao'])
+            );
+    
+            $funcionario->address()->create(
+                $request->only(['logradouro', 'numero', 'complemento', 'bairro', 'cidade', 'cep', 'estado'])
+            );
 
-        $funcionario->address()->create(
-            $request->only(['logradouro', 'numero', 'complemento', 'bairro', 'cidade', 'cep', 'estado'])
-        );
+            DB::commit();
+        } catch (\Throwable $th) {
+            DB::rollBack();
+
+            return redirect()
+                    ->back()
+                    ->withErrors('Erro ao criar novo funcionário');
+        }
 
         return redirect()
             ->route('funcionarios.index')
