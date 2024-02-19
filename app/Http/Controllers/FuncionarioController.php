@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Employee;
 use Illuminate\Http\Request;
 
 class FuncionarioController extends Controller
@@ -11,7 +12,9 @@ class FuncionarioController extends Controller
      */
     public function index()
     {
-        echo "estou no método index da classe FuncionarioController";
+        $funcionarios = Employee::paginate(15);
+
+        return view('funcionarios.index', compact('funcionarios'));
     }
 
     /**
