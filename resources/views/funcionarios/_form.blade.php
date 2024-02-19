@@ -8,13 +8,13 @@
 
 <fieldset class="border rounded-lg p-4 mb-4">
     <legend class="font-bold">Endereço</legend>
-    <x-input nome="logradouro" :valorPadrao="$funcionario->logradouro ?? ''" labelTitulo="Logradouro do funcionario" />
-    <x-input nome="numero" :valorPadrao="$funcionario->numero ?? ''" labelTitulo="Número do funcionario" />
-    <x-input nome="bairro" :valorPadrao="$funcionario->bairro ?? ''" labelTitulo="Bairro do funcionario" />
-    <x-input nome="cidade" :valorPadrao="$funcionario->cidade ?? ''" labelTitulo="Cidade do funcionario" />
-    <x-input nome="complemento" :valorPadrao="$funcionario->complemento ?? ''" labelTitulo="Complemento do funcionario" />
-    <x-input nome="cep" :valorPadrao="$funcionario->cep ?? ''" labelTitulo="CEP do funcionario" />
-    <x-input nome="estado" :valorPadrao="$funcionario->estado ?? ''" labelTitulo="Estado do funcionario" />
+    <x-input nome="logradouro" :valorPadrao="$funcionario->address->logradouro ?? ''" labelTitulo="Logradouro do funcionario" />
+    <x-input nome="numero" :valorPadrao="$funcionario->address->numero ?? ''" labelTitulo="Número do funcionario" />
+    <x-input nome="bairro" :valorPadrao="$funcionario->address->bairro ?? ''" labelTitulo="Bairro do funcionario" />
+    <x-input nome="cidade" :valorPadrao="$funcionario->address->cidade ?? ''" labelTitulo="Cidade do funcionario" />
+    <x-input nome="complemento" :valorPadrao="$funcionario->address->complemento ?? ''" labelTitulo="Complemento do funcionario" />
+    <x-input nome="cep" :valorPadrao="$funcionario->address->cep ?? ''" labelTitulo="CEP do funcionario" />
+    <x-input nome="estado" :valorPadrao="$funcionario->address->estado ?? ''" labelTitulo="Estado do funcionario" />
 </fieldset>
 
 <x-botao-primario titulo="Salvar dados Funcionário" />
