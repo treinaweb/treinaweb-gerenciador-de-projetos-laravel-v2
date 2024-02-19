@@ -32,24 +32,15 @@ class FuncionarioController extends Controller
      */
     public function store(FuncionarioRequest $request)
     {
-        try {
-            DB::beginTransaction();
-            
-            $funcionario = Employee::create(
-                $request->only(['nome', 'cpf', 'data_contratacao'])
-            );
-    
-            $funcionario->address()->create(
-                $request->only(['logradouro', 'numero', 'complemento', 'bairro', 'cidade', 'cep', 'estado'])
-            );
+        $estaCriado = Employee::criar(
+            $request->only(['nome', 'cpf', 'data_contratacao']),
+            $request->only(['logradouro', 'numero', 'complemento', 'bairro', 'cidade', 'cep', 'estado'])
+        );
 
-            DB::commit();
-        } catch (\Throwable $th) {
-            DB::rollBack();
-
+        if (!$estaCriado) {
             return redirect()
-                    ->back()
-                    ->withErrors('Erro ao criar novo funcionário');
+            ->back()
+            ->withErrors('Erro ao criar novo funcionário');
         }
 
         return redirect()
@@ -78,21 +69,12 @@ class FuncionarioController extends Controller
      */
     public function update(FuncionarioRequest $request, Employee $funcionario)
     {
-        try {
-            DB::beginTransaction();
-            
-            $funcionario->update(
-                $request->only(['nome', 'cpf', 'data_contratacao'])
-            );
-    
-            $funcionario->address()->update(
-                $request->only(['logradouro', 'numero', 'complemento', 'bairro', 'cidade', 'cep', 'estado'])
-            );
+        $estaAtualizado = $funcionario->atualizar(
+            $request->only(['nome', 'cpf', 'data_contratacao']),
+            $request->only(['logradouro', 'numero', 'complemento', 'bairro', 'cidade', 'cep', 'estado'])
+        );
 
-            DB::commit();
-        } catch (\Throwable $th) {
-            DB::rollBack();
-
+        if (!$estaAtualizado) {
             return redirect()
                     ->back()
                     ->withErrors('Erro ao atualizar o funcionário');
