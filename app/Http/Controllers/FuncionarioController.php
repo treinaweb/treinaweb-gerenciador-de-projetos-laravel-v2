@@ -76,9 +76,31 @@ class FuncionarioController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(FuncionarioRequest $request, Employee $funcionario)
     {
-        //
+        try {
+            DB::beginTransaction();
+            
+            $funcionario->update(
+                $request->only(['nome', 'cpf', 'data_contratacao'])
+            );
+    
+            $funcionario->address()->update(
+                $request->only(['logradouro', 'numero', 'complemento', 'bairro', 'cidade', 'cep', 'estado'])
+            );
+
+            DB::commit();
+        } catch (\Throwable $th) {
+            DB::rollBack();
+
+            return redirect()
+                    ->back()
+                    ->withErrors('Erro ao atualizar o funcionário');
+        }
+
+        return redirect()
+            ->route('funcionarios.index')
+            ->with('mensagem', 'Funcionário atualizado com sucesso!');
     }
 
     /**
