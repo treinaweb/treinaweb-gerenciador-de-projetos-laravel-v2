@@ -18,3 +18,26 @@
 </fieldset>
 
 <x-botao-primario titulo="Salvar dados Funcionário" />
+
+@push('scripts')
+    <script src="https://unpkg.com/imask"></script>
+    <script>
+        IMask(
+            document.getElementById('cpf'), {
+                mask: '000.000.000-00'
+            }
+        );
+
+        IMask(
+            document.getElementById('data_contratacao'), {
+                mask: '00/00/0000'
+            }
+        );
+
+        IMask(
+            document.getElementById('cep'), {
+                mask: '00.000-00'
+            }
+        );
+    </script>
+@endpush
