@@ -39,13 +39,14 @@ class FuncionarioController extends Controller
 
         if (!$estaCriado) {
             return redirect()
-            ->back()
-            ->withErrors('Erro ao criar novo funcionário');
+                ->back()
+                ->withInput()
+                ->withErrors('Erro ao criar novo funcionário');
         }
 
         return redirect()
-            ->route('funcionarios.index')
-            ->with('mensagem', 'Funcionário criado com sucesso!');
+                ->route('funcionarios.index')
+                ->with('mensagem', 'Funcionário criado com sucesso!');
     }
 
     /**
@@ -69,6 +70,7 @@ class FuncionarioController extends Controller
         if (!$estaAtualizado) {
             return redirect()
                     ->back()
+                    ->withInput()
                     ->withErrors('Erro ao atualizar o funcionário');
         }
 
