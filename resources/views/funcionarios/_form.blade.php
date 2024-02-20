@@ -36,7 +36,7 @@
 
         IMask(
             document.getElementById('cep'), {
-                mask: '00.000-00'
+                mask: '00.000-000'
             }
         );
     </script>

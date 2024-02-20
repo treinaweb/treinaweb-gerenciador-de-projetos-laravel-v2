@@ -14,6 +14,21 @@ class FuncionarioRequest extends FormRequest
         return true;
     }
 
+    protected function prepareForValidation()
+    {
+        $dados = $this->all();
+        
+        if (isset($dados['cpf'])) {
+            $dados['cpf'] = str_replace(['.', '-'], '', $dados['cpf'] );
+        }
+
+        if (isset($dados['cep'])) {
+            $dados['cep'] = str_replace(['.', '-'], '', $dados['cep'] );
+        }
+        
+        $this->replace($dados);
+    }
+
     /**
      * Get the validation rules that apply to the request.
      *
