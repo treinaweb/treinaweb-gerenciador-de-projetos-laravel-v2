@@ -39,7 +39,7 @@ class FuncionarioRequest extends FormRequest
         return [
             'nome' => ['required', 'min:2', 'max:100', 'string'],
             'cpf' => ['required', 'size:11', 'string'],
-            'data_contratacao' => ['required'],
+            'data_contratacao' => ['required', 'date_format:d/m/Y'],
             'logradouro' => ['required', 'min:2', 'max:255', 'string'],
             'numero' => ['required', 'max:20', 'string'],
             'bairro' => ['required', 'max:50', 'string'],
