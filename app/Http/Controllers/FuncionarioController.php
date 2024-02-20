@@ -2,17 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\FuncionarioRequest;
 use App\Models\Employee;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Routing\Redirector;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Contracts\View\Factory;
+use App\Http\Requests\FuncionarioRequest;
 
 class FuncionarioController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Mostra a lista de funcionários
      */
-    public function index()
+    public function index(): View|Factory
     {
         $funcionarios = Employee::paginate(15);
 
@@ -20,17 +22,17 @@ class FuncionarioController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Mostra o formulário para criar um novo funcionário
      */
-    public function create()
+    public function create(): View|Factory
     {
         return view('funcionarios.create');
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Cria um novo funcionário no banco
      */
-    public function store(FuncionarioRequest $request)
+    public function store(FuncionarioRequest $request): Redirector|RedirectResponse
     {
         $estaCriado = Employee::criar(
             $request->only(['nome', 'cpf', 'data_contratacao']),
@@ -50,17 +52,17 @@ class FuncionarioController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Mostra o formulário com os dados para edição
      */
-    public function edit(Employee $funcionario)
+    public function edit(Employee $funcionario): View|Factory
     {
         return view('funcionarios.edit', compact('funcionario'));
     }
 
     /**
-     * Update the specified resource in storage.
+     * Atualiza um funcionário especifico
      */
-    public function update(FuncionarioRequest $request, Employee $funcionario)
+    public function update(FuncionarioRequest $request, Employee $funcionario): Redirector|RedirectResponse
     {
         $estaAtualizado = $funcionario->atualizar(
             $request->only(['nome', 'cpf', 'data_contratacao']),
@@ -80,9 +82,9 @@ class FuncionarioController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Deleta um funcionário especifico
      */
-    public function destroy(Employee $funcionario)
+    public function destroy(Employee $funcionario): Redirector|RedirectResponse
     {
         $estaApagado = $funcionario->apagar();
 

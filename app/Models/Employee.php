@@ -25,7 +25,7 @@ class Employee extends Model
     {
         return Attribute::make(
             get: fn (string $value) => Carbon::make($value)->format('d/m/Y'),
-            set: fn (string $value) => Carbon::make($value)->format('Y-m-d')
+            set: fn (string $value) => Carbon::createFromFormat('d/m/Y', $value)->format('Y-m-d')
         );
     }
 
@@ -64,6 +64,8 @@ class Employee extends Model
 
             DB::commit();
         } catch (\Throwable $th) {
+            throw $th;
+
             DB::rollBack();
 
             return false;
