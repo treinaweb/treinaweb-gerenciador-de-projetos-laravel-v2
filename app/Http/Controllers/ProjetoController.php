@@ -15,7 +15,7 @@ class ProjetoController extends Controller
     /**
      * Mostra a lista de projetos
      */
-    public function index()
+    public function index(): View|Factory
     {
         $projetos = Project::with('client')->paginate(15);
 
@@ -53,26 +53,36 @@ class ProjetoController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Mostra o formulário com os dados para edição
      */
-    public function edit(string $id)
+    public function edit(Project $projeto): View|Factory
     {
-        //
+        return view('projetos.edit', compact('projeto'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(ProjetoRequest $request, Project $projeto): Redirector|RedirectResponse
     {
-        //
+        $projeto->update(
+            $request->all()
+        );
+
+        return redirect()
+                ->route('projetos.index')
+                ->with('mensagem', 'Projeto atualizado com sucesso!');
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Deleta um projeto especifico
      */
-    public function destroy(string $id)
+    public function destroy(Project $projeto): Redirector|RedirectResponse
     {
-        //
+        $projeto->delete();
+
+        return redirect()
+                ->route('projetos.index')
+                ->with('mensagem', 'Projeto apagado com sucesso!');
     }
 }
