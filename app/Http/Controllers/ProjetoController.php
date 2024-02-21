@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Project;
+use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\Request;
+use Illuminate\Contracts\View\View;
 
 class ProjetoController extends Controller
 {
@@ -18,11 +20,11 @@ class ProjetoController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Mostra o formulário para criar um novo projeto
      */
-    public function create()
+    public function create(): View|Factory
     {
-        //
+        return view('projetos.create');
     }
 
     /**
