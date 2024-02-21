@@ -48,9 +48,18 @@
 
                                 <button
                                     class="bg-red-500 border rounded-md p-1 px-3 text-white"
-                                    onclick="return confirm('Deseja realmente apagar esse cliente?')"
+                                    onclick="return confirm('Deseja realmente apagar esse funcionário?')"
                                 >Excluir</button>
+                            </form>
 
+                            <form method="POST" action="{{ route('funcionarios.demitir', $funcionario) }}" class="inline-block">
+                                @method('patch')
+                                @csrf
+
+                                <button
+                                    class="bg-pink-500 border rounded-md p-1 px-3 text-white"
+                                    onclick="return confirm('Deseja realmente demitir esse funcionário?')"
+                                >Demitir</button>
                             </form>
                         </td>
                     </tr>

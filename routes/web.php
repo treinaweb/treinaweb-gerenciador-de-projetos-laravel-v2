@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ClienteController;
+use App\Http\Controllers\DemitirFuncionario;
 use App\Http\Controllers\FuncionarioController;
 use Illuminate\Support\Facades\Route;
 
@@ -27,3 +28,4 @@ Route::put('clientes/{cliente}', [ClienteController::class, 'update'])->name('cl
 Route::delete('clientes/{cliente}', [ClienteController::class, 'destroy'])->name('clientes.destroy');
 
 Route::resource('funcionarios', FuncionarioController::class)->except('show');
+Route::patch('funcionarios/{funcionario}/demissao', DemitirFuncionario::class)->name('funcionarios.demitir');
