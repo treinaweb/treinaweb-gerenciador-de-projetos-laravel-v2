@@ -6,6 +6,7 @@ use App\Models\Project;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
 use Illuminate\Contracts\View\View;
+use App\Http\Requests\ProjetoRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Contracts\View\Factory;
 
@@ -32,7 +33,7 @@ class ProjetoController extends Controller
     /**
      * Cria um novo projeto no banco
      */
-    public function store(Request $request): Redirector|RedirectResponse
+    public function store(ProjetoRequest $request): Redirector|RedirectResponse
     {
         Project::create(
             $request->all()
