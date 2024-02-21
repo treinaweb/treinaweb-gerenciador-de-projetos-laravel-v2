@@ -9,6 +9,9 @@
             <li class="px-4">
                 <a href="{{ route('funcionarios.index') }}">Funcionários</a>
             </li>
+            <li class="px-4">
+                <a href="{{ route('projetos.index') }}">Projetos</a>
+            </li>
         </ul>
     </div>
 </nav>
