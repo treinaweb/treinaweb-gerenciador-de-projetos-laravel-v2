@@ -2,16 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Project;
 use Illuminate\Http\Request;
 
 class ProjetoController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Mostra a lista de projetos
      */
     public function index()
     {
-        echo "estou na index do controller ProjetoController";
+        $projetos = Project::with('client')->paginate(15);
+
+        return view('projetos.index', compact('projetos'));
     }
 
     /**
