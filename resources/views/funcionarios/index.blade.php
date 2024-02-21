@@ -57,9 +57,12 @@
                                 @csrf
 
                                 <button
-                                    class="bg-pink-500 border rounded-md p-1 px-3 text-white"
+                                    class="bg-pink-500 border rounded-md p-1 px-3 text-white disabled:bg-gray-300"
                                     onclick="return confirm('Deseja realmente demitir esse funcionário?')"
-                                >Demitir</button>
+                                    {{ $funcionario->data_demissao ? 'disabled' : '' }}
+                                >
+                                    {{ $funcionario->data_demissao ? 'Demitido' : 'Demitir' }}
+                                </button>
                             </form>
                         </td>
                     </tr>
