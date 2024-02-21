@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Project;
-use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Redirector;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Contracts\View\Factory;
 
 class ProjetoController extends Controller
 {
@@ -28,11 +30,17 @@ class ProjetoController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Cria um novo projeto no banco
      */
-    public function store(Request $request)
+    public function store(Request $request): Redirector|RedirectResponse
     {
-        //
+        Project::create(
+            $request->all()
+        );
+
+        return redirect()
+                ->route('projetos.index')
+                ->with('mensagem', 'Projeto criado com sucesso!');
     }
 
     /**
