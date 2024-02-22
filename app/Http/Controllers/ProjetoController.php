@@ -30,7 +30,7 @@ class ProjetoController extends Controller
     public function create(): View|Factory
     {
         $clientes = Client::all();
-        $funcionarios = Employee::all();
+        $funcionarios = Employee::ativo()->get();
 
         return view('projetos.create', compact('clientes', 'funcionarios'));
     }
@@ -65,7 +65,7 @@ class ProjetoController extends Controller
     public function edit(Project $projeto): View|Factory
     {
         $clientes = Client::all();
-        $funcionarios = Employee::all();
+        $funcionarios = Employee::ativo()->get();
 
         return view('projetos.edit', compact('projeto', 'clientes', 'funcionarios'));
     }

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Carbon\Carbon;
 use App\Helpers\DataHelpers;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Casts\Attribute;
@@ -46,6 +47,14 @@ class Employee extends Model
     public function projects()
     {
         return $this->belongsToMany(Project::class, 'employee_project', 'employee_id', 'project_id');
+    }
+
+    /**
+     * Adiciona um escopo para funcionários não demitidos
+     */
+    public function scopeAtivo(Builder $query): void
+    {
+        $query->whereNull('data_demissao');
     }
 
     /**
