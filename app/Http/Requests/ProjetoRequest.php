@@ -14,6 +14,17 @@ class ProjetoRequest extends FormRequest
         return true;
     }
 
+    protected function prepareForValidation()
+    {
+        $dados = $this->all();
+        
+        if (isset($dados['orcamento'])) {
+            $dados['orcamento'] = str_replace(['.', ','], ['', '.'], $dados['orcamento']);
+        }
+        
+        $this->replace($dados);
+    }
+
     /**
      * Get the validation rules that apply to the request.
      *

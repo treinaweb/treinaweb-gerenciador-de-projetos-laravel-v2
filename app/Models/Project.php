@@ -33,6 +33,16 @@ class Project extends Model
     }
 
     /**
+     * Define um accessor para o campo orçamento
+     */
+    public function orcamento(): Attribute
+    {
+        return Attribute::make(
+            get: fn (string $value) => number_format($value, 2, ',', '.'),
+        );
+    }
+
+    /**
      * Um projeto pertence a um cliente
      * 
      * @return BelongsTo
