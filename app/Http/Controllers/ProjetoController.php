@@ -8,6 +8,7 @@ use Illuminate\Routing\Redirector;
 use Illuminate\Contracts\View\View;
 use App\Http\Requests\ProjetoRequest;
 use App\Models\Client;
+use App\Models\Employee;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Contracts\View\Factory;
 
@@ -29,8 +30,9 @@ class ProjetoController extends Controller
     public function create(): View|Factory
     {
         $clientes = Client::all();
+        $funcionarios = Employee::all();
 
-        return view('projetos.create', compact('clientes'));
+        return view('projetos.create', compact('clientes', 'funcionarios'));
     }
 
     /**
@@ -38,9 +40,11 @@ class ProjetoController extends Controller
      */
     public function store(ProjetoRequest $request): Redirector|RedirectResponse
     {
-        Project::create(
+        $projeto = Project::create(
             $request->all()
         );
+
+        $projeto->employees()->sync($request->funcionarios);
 
         return redirect()
                 ->route('projetos.index')
@@ -61,8 +65,9 @@ class ProjetoController extends Controller
     public function edit(Project $projeto): View|Factory
     {
         $clientes = Client::all();
+        $funcionarios = Employee::all();
 
-        return view('projetos.edit', compact('projeto', 'clientes'));
+        return view('projetos.edit', compact('projeto', 'clientes', 'funcionarios'));
     }
 
     /**
@@ -73,6 +78,8 @@ class ProjetoController extends Controller
         $projeto->update(
             $request->all()
         );
+
+        $projeto->employees()->sync($request->funcionarios);
 
         return redirect()
                 ->route('projetos.index')

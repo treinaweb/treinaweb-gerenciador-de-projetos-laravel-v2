@@ -13,6 +13,15 @@
     :valorPadrao="$projeto->client_id ?? ''"
 />
 
+<x-select-multiple 
+    nome="funcionarios"
+    labelTitulo="Funcionários que trabalham no projeto"
+    itemID="id"
+    itemDescricao="nome"
+    :lista="$funcionarios"
+    :valorPadrao="isset($projeto) ? $projeto->employees->pluck('id')->toArray() : []"
+/>
+
 <x-botao-primario titulo="Salvar dados projeto" />
 
 @push('scripts')
