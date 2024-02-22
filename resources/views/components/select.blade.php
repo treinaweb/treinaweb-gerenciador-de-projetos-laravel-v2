@@ -12,10 +12,10 @@
         <option>Selecione um item</option>
         @foreach ($lista as $item)
             <option
-                value="{{ $item->name }}"
-                {{ $item->name == $valorPadrao ? 'selected' : ''  }}
+                value="{{ $item->$itemID }}"
+                {{ $item->$itemID == $valorPadrao ? 'selected' : ''  }}
             >
-                {{ $item->value }}
+                {{ $item->$itemDescricao }}
             </option>
         @endforeach
     </select>

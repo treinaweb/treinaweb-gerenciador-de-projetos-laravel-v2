@@ -14,7 +14,14 @@
     <x-input nome="cidade" :valorPadrao="$funcionario->address->cidade ?? ''" labelTitulo="Cidade do funcionario" />
     <x-input nome="complemento" :valorPadrao="$funcionario->address->complemento ?? ''" labelTitulo="Complemento do funcionario" />
     <x-input nome="cep" :valorPadrao="$funcionario->address->cep ?? ''" labelTitulo="CEP do funcionario" />
-    <x-select nome="estado" :lista="\App\Enums\EstadosBrasileiros::cases()" :valorPadrao="$funcionario->address->estado ?? ''" labelTitulo="Estado do funcionario" />
+    <x-select 
+        nome="estado"
+        itemID="name"
+        itemDescricao="value"
+        :lista="\App\Enums\EstadosBrasileiros::cases()"
+        :valorPadrao="$funcionario->address->estado ?? ''"
+        labelTitulo="Estado do funcionario"
+    />
 </fieldset>
 
 <x-botao-primario titulo="Salvar dados Funcionário" />

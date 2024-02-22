@@ -5,4 +5,13 @@
 <x-input nome="data_final" :valorPadrao="$projeto->data_final ?? ''" labelTitulo="Data final do projeto" />
 <x-input nome="client_id" :valorPadrao="$projeto->client_id ?? ''" labelTitulo="Cliente do projeto" />
 
+<x-select 
+    nome="client_id"
+    labelTitulo="Cliente do projeto"
+    itemID="id"
+    itemDescricao="nome"
+    :lista="$clientes"
+    :valorPadrao="$projeto->client_id ?? ''"
+/>
+
 <x-botao-primario titulo="Salvar dados projeto" />

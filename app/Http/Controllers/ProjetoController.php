@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
 use Illuminate\Contracts\View\View;
 use App\Http\Requests\ProjetoRequest;
+use App\Models\Client;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Contracts\View\Factory;
 
@@ -27,7 +28,9 @@ class ProjetoController extends Controller
      */
     public function create(): View|Factory
     {
-        return view('projetos.create');
+        $clientes = Client::all();
+
+        return view('projetos.create', compact('clientes'));
     }
 
     /**
@@ -57,7 +60,9 @@ class ProjetoController extends Controller
      */
     public function edit(Project $projeto): View|Factory
     {
-        return view('projetos.edit', compact('projeto'));
+        $clientes = Client::all();
+
+        return view('projetos.edit', compact('projeto', 'clientes'));
     }
 
     /**
