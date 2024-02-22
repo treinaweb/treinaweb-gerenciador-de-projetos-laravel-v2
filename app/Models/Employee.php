@@ -3,9 +3,10 @@
 namespace App\Models;
 
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Casts\Attribute;
+use App\Helpers\DataHelpers;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -23,10 +24,7 @@ class Employee extends Model
      */
     protected function dataContratacao(): Attribute
     {
-        return Attribute::make(
-            get: fn (string $value) => Carbon::make($value)->format('d/m/Y'),
-            set: fn (string $value) => Carbon::createFromFormat('d/m/Y', $value)->format('Y-m-d')
-        );
+        return DataHelpers::converteData();
     }
 
     /**
