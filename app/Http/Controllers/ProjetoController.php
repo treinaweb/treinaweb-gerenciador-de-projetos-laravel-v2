@@ -40,11 +40,17 @@ class ProjetoController extends Controller
      */
     public function store(ProjetoRequest $request): Redirector|RedirectResponse
     {
-        $projeto = Project::create(
-            $request->all()
+        $estaCriado = Project::criarComFuncionarios(
+            $request->except('funcionarios'),
+            $request->funcionarios
         );
 
-        $projeto->employees()->sync($request->funcionarios);
+        if (!$estaCriado) {
+            return redirect()
+                ->back()
+                ->withInput()
+                ->withErrors('Erro ao criar novo projeto');
+        }
 
         return redirect()
                 ->route('projetos.index')
@@ -75,11 +81,17 @@ class ProjetoController extends Controller
      */
     public function update(ProjetoRequest $request, Project $projeto): Redirector|RedirectResponse
     {
-        $projeto->update(
-            $request->all()
+        $estaAtualizado = $projeto->atualizarComFuncionarios(
+            $request->except('funcionarios'),
+            $request->funcionarios
         );
 
-        $projeto->employees()->sync($request->funcionarios);
+        if (!$estaAtualizado) {
+            return redirect()
+                ->back()
+                ->withInput()
+                ->withErrors('Erro ao atualizar projeto');
+        }
 
         return redirect()
                 ->route('projetos.index')

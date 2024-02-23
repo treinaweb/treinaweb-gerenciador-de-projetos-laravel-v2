@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Support\Facades\DB;
 
 class Project extends Model
 {
@@ -60,5 +61,49 @@ class Project extends Model
     public function employees()
     {
         return $this->belongsToMany(Employee::class, 'employee_project', 'project_id', 'employee_id');
+    }
+
+    /**
+     * Cria um novo projeto com os funcionários alocados
+     */
+    static public function criarComFuncionarios(array $projeto, array $funcionariosAlocados): bool
+    {
+        try {
+            DB::beginTransaction();
+
+            $projeto = self::create($projeto);
+
+            $projeto->employees()->sync($funcionariosAlocados);
+
+            DB::commit();
+        } catch (\Throwable $th) {
+            DB::rollBack();
+
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * Atualizado projeto com os funcionários alocados
+     */
+    public function atualizarComFuncionarios(array $projeto, array $funcionariosAlocados): bool
+    {
+        try {
+            DB::beginTransaction();
+
+            $this->update($projeto);
+
+            $this->employees()->sync($funcionariosAlocados);
+
+            DB::commit();
+        } catch (\Throwable $th) {
+            DB::rollBack();
+
+            return false;
+        }
+
+        return true;
     }
 }
