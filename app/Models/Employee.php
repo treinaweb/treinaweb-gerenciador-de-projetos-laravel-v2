@@ -71,8 +71,6 @@ class Employee extends Model
 
             DB::commit();
         } catch (\Throwable $th) {
-            throw $th;
-
             DB::rollBack();
 
             return false;
