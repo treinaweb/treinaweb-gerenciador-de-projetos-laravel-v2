@@ -58,11 +58,11 @@ class ProjetoController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Mostra os detalhes de um projeto
      */
-    public function show(string $id)
+    public function show(Project $projeto): View|Factory
     {
-        //
+        return view('projetos.show', compact('projeto'));
     }
 
     /**
