@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Client;
 use App\Models\Project;
-use Illuminate\Http\Request;
+use App\Models\Employee;
 use Illuminate\Routing\Redirector;
 use Illuminate\Contracts\View\View;
 use App\Http\Requests\ProjetoRequest;
-use App\Models\Client;
-use App\Models\Employee;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Contracts\View\Factory;
 

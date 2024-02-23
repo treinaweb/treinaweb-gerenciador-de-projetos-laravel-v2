@@ -15,7 +15,7 @@ class ClienteRequest extends FormRequest
     }
 
     /**
-     * Get the validation rules that apply to the request.
+     * Valida os dados do cliente
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */

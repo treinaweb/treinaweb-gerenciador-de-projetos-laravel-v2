@@ -14,6 +14,9 @@ class ProjetoRequest extends FormRequest
         return true;
     }
 
+    /**
+     * Prepara os dados da request do projeto para validação
+     */
     protected function prepareForValidation()
     {
         $dados = $this->all();
@@ -26,7 +29,7 @@ class ProjetoRequest extends FormRequest
     }
 
     /**
-     * Get the validation rules that apply to the request.
+     * Valida os dados do projeto
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */

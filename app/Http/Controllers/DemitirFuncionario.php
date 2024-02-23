@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Employee;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
+use App\Models\Employee;
 
 class DemitirFuncionario extends Controller
 {
